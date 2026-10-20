@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Contact — Tjorn Van Wetter</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="contact">
+<main class="main">
+  <section class="hero hero--shorter">
+    <p class="eyebrow reveal">Contact</p>
+    <h1 class="title title--display split hero__title">Say<br><em>hello.</em></h1>
+  </section>
+  <section class="section section--end contact">
+    <div class="contact__intro">
+      <a class="contact__mail reveal" href="mailto:hello@example.com">hello@example.com</a>
+      <p class="meta contact__note reveal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nos commodius agimus. Non autem hoc: igitur ne illud quidem. Quacumque enim ingredimur, in aliqua historia vestigium ponimus. Et quidem, inquit, vehementer errat; Duo Reges:
+      constructio interrete. Quae cum magnifice primo dici viderentur, considerata minus probabantur.</p>
+      <p class="meta contact__note reveal">Replies within two working days.</p>
+    </div>
+    <div class="col2" reveal>
+      test
+    </div>
+    <form class="contact__form" id="form" novalidate>
+      <div class="field reveal"><input class="field__input" id="name" placeholder=" " required><label class="field__label" for="name">Name</label></div>
+      <div class="field reveal"><input class="field__input" id="mail" type="email" placeholder=" " required><label class="field__label" for="mail">Email</label></div>
+      <div class="field reveal"><textarea class="field__input" id="msg" rows="4" placeholder=" "></textarea><label class="field__label" for="msg">Message</label></div>
+      <div class="contact__actions reveal">
+        <button class="btn" type="submit"><span class="btn__roll"><span class="btn__text">Send message</span><span class="btn__text">Send message</span></span> →</button>
+        <span class="contact__status" aria-live="polite"></span>
+      </div>
+    </form>
+  </section>
+</main>
+<script src="../js/data.js"></script>
+<script src="../js/script.js"></script>
+</body>
+</html>
