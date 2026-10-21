@@ -28,6 +28,10 @@
         <button class="header__toggle" aria-expanded="false">Menu</button>
         <nav class="nav" aria-label="Main">
           ${link(`${ROOT}index.html#work`, "work", "Work")}${link(`${SUB}about.html`, "about", "About")}
+          <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+            <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path></svg>
+            <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"></path></svg>
+          </button>
         </nav>
       </header>
       <div class="cursor" aria-hidden="true"><span class="cursor__label">View</span></div>`
@@ -47,6 +51,20 @@
       const open = root.classList.toggle("page--menu-open");
       t.setAttribute("aria-expanded", open);
       t.textContent = open ? "Close" : "Menu";
+    });
+  }
+
+  /* ---------- Dark mode toggle ---------- */
+  function theme() {
+    const btn = $(".theme-toggle");
+    if (!btn) return;
+    const sync = () => btn.setAttribute("aria-pressed", String(root.dataset.theme === "dark"));
+    sync();
+    btn.addEventListener("click", () => {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      sync();
     });
   }
 
@@ -388,6 +406,7 @@
 
   /* ---------- Boot ---------- */
   chrome();
+  theme();
   transitions();
   ({ home, case: casePage, photo: photoPage, contact }[page] || (() => {}))();
   splitLines();
