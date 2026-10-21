@@ -1,0 +1,40 @@
+@use "../abstracts" as *;
+
+// Block: .contact
+.contact {
+  @include grid-12;
+  @include stack-on-mobile;
+
+  &__intro { grid-column: 1 / span 5; }
+
+  &__mail {
+    @include serif(clamp(30px, 4vw, 58px), 1);
+    display: inline-block;
+    padding-bottom: 4px;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.7s $ease;
+
+    &:hover { background-size: 100% 1px; }
+  }
+
+  &__note { margin-top: 28px; }
+
+  &__form {
+    grid-column: 7 / span 6;
+    display: grid;
+    gap: 30px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__status {
+    min-height: 1.4em;
+    font-family: $mono;
+    font-size: 12px;
+  }
+}

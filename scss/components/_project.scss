@@ -1,0 +1,87 @@
+@use "sass:list";
+@use "../abstracts" as *;
+
+// Block: .projects — staggered editorial grid
+.projects {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: clamp(28px, 4vw, 64px) clamp(16px, 2vw, 28px);
+}
+
+// Block: .project — card in the grid
+.project {
+  grid-column: span 6;
+  transition: opacity 0.5s $ease, transform 0.7s $ease;
+
+  // Staggered placement, repeating every 4 cards
+  $placements: (
+    1: (1, 7, 0),
+    2: (9, 4, 18vh),
+    3: (2, 5, 0),
+    4: (7, 6, 10vh),
+  );
+  @each $n, $p in $placements {
+    &:nth-child(4n + #{$n}) {
+      grid-column: #{list.nth($p, 1)} / span #{list.nth($p, 2)};
+      margin-top: list.nth($p, 3);
+    }
+  }
+
+  @include mq(sm) {
+    grid-column: 1 / -1 !important;
+    margin-top: 0 !important;
+  }
+
+  &__link { display: block; }
+
+  &__frame {
+    aspect-ratio: 4 / 5;
+    .project:nth-child(4n + 1) &,
+    .project:nth-child(4n + 4) & { aspect-ratio: 3 / 2; }
+  }
+
+  &__link:hover .frame__img--loaded { transform: scale(1.045); }
+  &__link:hover .frame::after { opacity: 0.18; }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-top: 14px;
+  }
+
+  &__title {
+    @include serif(clamp(26px, 2.6vw, 38px), 1, -0.015em);
+    margin: 0;
+  }
+
+  &__arrow {
+    display: inline-block;
+    font-family: $sans;
+    font-size: 0.5em;
+    vertical-align: middle;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: 0.5s $ease;
+
+    .project__link:hover & { opacity: 1; transform: translateX(6px); }
+  }
+
+  &__kicker {
+    margin-top: 6px;
+
+    :root[data-theme="dark"] & { color: #ffffff; }
+  }
+
+  // Modifier: unpublished teaser (greyscale, not clickable)
+  &--teaser {
+    .frame__img--loaded { filter: grayscale(1) contrast(0.9); }
+    &:hover .frame__img--loaded { filter: grayscale(0.4); }
+  }
+
+  &--hidden { display: none; }
+
+  // used by JS during filter animation
+  &--out { opacity: 0; transform: translateY(20px); }
+}

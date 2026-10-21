@@ -1,0 +1,73 @@
+// ==========================================================
+// Design tokens
+// ==========================================================
+
+// Colours — CSS custom properties, swapped via html[data-theme]
+:root {
+  --paper:     #f3f0ea;
+  --paper-2:   #e9e5dc;
+  --ink:       #131313;
+  --muted:     #7d7870;
+  --sea:       #5fa8bd;
+  --line:      rgba(19, 19, 19, 0.14);
+  --body-text: #3c3a36;
+  --curtain: #a4ceda;
+}
+
+:root[data-theme="dark"] {
+  --paper:     #15171a;
+  --paper-2:   #1d2024;
+  --ink:       #f3f0ea;
+  --muted:     #dbdbda;
+  --sea:       #a4ceda;
+  --line:      rgba(243, 240, 234, 0.16);
+  --body-text: #e9e9e9;
+  --curtain: #a4ceda;
+}
+
+// Respect the OS preference before the toggle script has run / without JS
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --paper:     #15171a;
+    --paper-2:   #1d2024;
+    --ink:       #f3f0ea;
+    --muted:     #9b968d;
+    --sea:       #5fa8bd;
+    --line:      rgba(243, 240, 234, 0.16);
+    --body-text: #d8d4cc;
+    --curtain: #5fa8bd;
+  }
+}
+
+$paper:     var(--paper);
+$paper-2:   var(--paper-2);
+$ink:       var(--ink);
+$muted:     var(--muted);
+$sea:       var(--sea);
+$line:      var(--line);
+$body-text: var(--body-text);
+$curtain:   var(--curtain);
+
+// Lightbox (dedicated dark surface — stays dark in both themes)
+$lb-bg:    rgba(14, 16, 17, 0.96);
+$lb-ink:   #eeeeee;
+$lb-muted: #9a9690;
+
+// Typography
+$serif: "Instrument Serif", "Times New Roman", serif;
+$sans:  "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+$mono:  "IBM Plex Mono", ui-monospace, monospace;
+
+// Motion
+$ease:    cubic-bezier(0.22, 1, 0.36, 1);
+$ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+// Layout
+$gutter: clamp(16px, 3.2vw, 44px);
+$columns: 12;
+
+// Breakpoints
+$breakpoints: (
+  sm: 720px,
+  md: 900px,
+);

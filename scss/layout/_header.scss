@@ -1,0 +1,80 @@
+@use "../abstracts" as *;
+
+// Block: .header
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px $gutter;
+  color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+
+  > * { pointer-events: auto; }
+
+  &__logo {
+    @include label(13px, 0.2em, 600);
+    display: inline-flex;
+    gap: 0.6em;
+    align-items: baseline;
+  }
+
+  &__logo-tag {
+    font-family: $serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0;
+    text-transform: none;
+    opacity: 0.75;
+    transition: opacity 0.4s $ease;
+
+    .page--scrolled & { opacity: 0; }
+  }
+
+  &__toggle {
+    display: none;
+    @include label(12px, 0.14em);
+
+    @include mq(sm) { display: block; }
+  }
+
+  .page--menu-open & { mix-blend-mode: normal; }
+}
+
+// Block: .nav
+.nav {
+  display: flex;
+  gap: clamp(18px, 2.6vw, 38px);
+
+  &__link {
+    @include label(12px, 0.14em);
+    @include underline-grow(("&:hover", "&--active"));
+    padding: 4px 0;
+  }
+
+  @include mq(sm) {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    padding: $gutter;
+    background: #131313;
+    color: #f3f0ea;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.8s $ease-io;
+
+    &__link {
+      @include serif(56px, 1.1);
+      text-transform: none;
+    }
+
+    .page--menu-open & { clip-path: inset(0 0 0 0); }
+  }
+}

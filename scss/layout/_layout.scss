@@ -1,0 +1,12 @@
+@use "../abstracts" as *;
+
+// Block: .main — page wrapper
+.main { padding: 0 $gutter; }
+
+// Block: .section — vertical rhythm
+.section {
+  padding: clamp(80px, 12vw, 180px) 0;
+
+  &--tight-top { padding-top: 100px; }
+  &--end { padding-top: 0; padding-bottom: 140px; }
+}

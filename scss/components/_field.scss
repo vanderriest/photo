@@ -1,0 +1,48 @@
+@use "../abstracts" as *;
+
+// Block: .field — input with floating label and focus line
+.field {
+  position: relative;
+
+  &__input {
+    width: 100%;
+    padding: 22px 0 10px;
+    border: 0;
+    border-bottom: 1px solid $line;
+    border-radius: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 17px;
+    color: $ink;
+    outline: none;
+    resize: vertical;
+  }
+
+  &__label {
+    position: absolute;
+    left: 0; top: 22px;
+    color: $muted;
+    pointer-events: none;
+    transform-origin: left;
+    transition: transform 0.45s $ease, font-size 0.45s $ease, color 0.3s;
+  }
+
+  &__input:focus + &__label,
+  &__input:not(:placeholder-shown) + &__label {
+    @include label(11px, 0.14em, 400);
+    transform: translateY(-20px);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: $ink;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.7s $ease;
+  }
+
+  &:focus-within::after { transform: scaleX(1); }
+}

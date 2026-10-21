@@ -1,0 +1,17 @@
+@use "../abstracts" as *;
+
+// Block: .badge
+.badge {
+  font-family: $mono;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 7px;
+  border: 1px solid $line;
+  border-radius: 99px;
+  color: $muted;
+  :root[data-theme="dark"] & {
+    color: $sea;
+    border: 1px solid $sea;
+  }
+}

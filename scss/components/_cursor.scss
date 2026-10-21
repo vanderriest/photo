@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+
+// Block: .cursor — follower with contextual label (position set by JS)
+.cursor {
+  @include label(11px, 0.14em);
+  position: fixed;
+  left: 0; top: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 92px; height: 92px;
+  margin: -46px 0 0 -46px;
+  border-radius: 50%;
+  background: $ink;
+  color: $paper;
+  pointer-events: none;
+  transform: translate3d(-200px, -200px, 0) scale(0);
+  transition: transform 0.15s linear;
+
+  @include touch { display: none; }
+}

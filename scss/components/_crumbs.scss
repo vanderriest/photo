@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+// Block: .crumbs — breadcrumb
+.crumbs {
+  @include label(11px, 0.14em, 400);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: $muted;
+
+  &__link {
+    color: $ink;
+    &:hover { text-decoration: underline; text-underline-offset: 3px; }
+  }
+}

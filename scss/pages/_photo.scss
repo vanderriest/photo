@@ -1,0 +1,101 @@
+@use "../abstracts" as *;
+
+// Block: .photo — standalone photo page (level 3) with loupe zoom (level 4)
+.photo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: clamp(24px, 3vw, 48px);
+  min-height: 100vh;
+  padding-top: 110px;
+
+  @include mq(md) { grid-template-columns: 1fr; }
+
+  &__view {
+    position: relative;
+    height: calc(100vh - 150px);
+    overflow: hidden;
+    background: $paper-2;
+    cursor: zoom-in;
+
+    @include mq(md) { height: 70vh; }
+
+    .frame__img {
+      object-fit: contain;
+      transition: transform 0.7s $ease, opacity 1s;
+    }
+
+    &--zoomed {
+      cursor: move;
+      .frame__img { transition: transform 0.1s linear; }
+    }
+  }
+
+  &__loupe {
+    position: absolute;
+    right: 16px; bottom: 16px;
+    padding: 6px 10px;
+    border-radius: 99px;
+    background: $paper;
+    font-family: $mono;
+    font-size: 10.5px;
+  }
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-bottom: 40px;
+  }
+
+  &__title {
+    @include serif(clamp(40px, 4vw, 64px), 0.95);
+    margin: 0;
+  }
+
+  &__label { margin-bottom: 10px; }
+
+  &__pager {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__pager-link { color: $ink; }
+}
+
+// Block: .spec — definition list
+.spec {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px 12px;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid $line;
+  font-size: 13.5px;
+
+  &__term {
+    @include label(11px, 0.14em, 400);
+    padding-top: 2px;
+    color: $muted;
+  }
+
+  &__def { margin: 0; }
+}
+
+// Block: .filmstrip — thumbnails of the series
+.filmstrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+
+  &__item {
+    aspect-ratio: 1;
+    background: $paper-2;
+    overflow: hidden;
+    opacity: 0.5;
+    transition: opacity 0.4s;
+
+    &:hover, &--active { opacity: 1; }
+  }
+
+  &__img { width: 100%; height: 100%; object-fit: cover; }
+}

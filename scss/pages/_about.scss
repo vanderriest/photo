@@ -1,0 +1,39 @@
+@use "../abstracts" as *;
+
+// Block: .about
+.about {
+  @include grid-12;
+  align-items: start;
+  @include stack-on-mobile;
+
+  &__portrait { grid-column: 1 / span 5; aspect-ratio: 4 / 5; }
+  &__text { grid-column: 7 / span 5; }
+  &__lead { margin-bottom: 28px; }
+  &__copy {
+    font-size: 16px;
+    color: #33312d;
+    :root[data-theme="dark"] & {
+      color: $body-text;
+    }
+  }
+  &__clients { margin-top: 48px; }
+  &__label { margin-bottom: 12px; }
+}
+
+// Block: .clients — hoverable list
+.clients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid $line;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid $line;
+    transition: padding 0.5s $ease, color 0.4s;
+
+    &:hover { padding-left: 14px; color: $sea; }
+  }
+}

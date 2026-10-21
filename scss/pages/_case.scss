@@ -1,0 +1,67 @@
+@use "../abstracts" as *;
+
+// Block: .case — project detail page (level 2)
+.case {
+  &__hero { padding: 150px 0 60px; }
+  &__title { margin-top: 22px; }
+
+  &__cover {
+    height: 88vh;
+    margin: 0 calc(#{$gutter} * -1);
+
+    .frame__img { transform: scale(1.15); } // parallax base
+  }
+
+  &__intro {
+    @include grid-12;
+    @include stack-on-mobile;
+  }
+
+  &__lead { grid-column: 1 / span 6; }
+
+  &__body {
+    grid-column: 8 / span 4;
+    margin: 0;
+    color: $body-text;
+  }
+}
+
+// Block: .facts — key/value strip
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 48px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid $line;
+
+  @include mq(sm) { grid-template-columns: 1fr 1fr; }
+
+  &__label { margin-bottom: 6px; }
+  &__value { margin: 0; font-size: 14px; }
+}
+
+// Block: .next — link to the next project
+.next {
+  display: block;
+  padding: 70px 0 110px;
+  border-top: 1px solid $line;
+  text-align: center;
+
+  &__title {
+    display: inline-block;
+    transition: letter-spacing 0.8s $ease, color 0.5s;
+
+    .next:hover & { letter-spacing: 0.01em; color: $sea; }
+  }
+
+  &__thumb {
+    width: 220px;
+    aspect-ratio: 4 / 5;
+    margin: 26px auto 0;
+    clip-path: inset(50% 0 50% 0);
+    transition: clip-path 0.9s $ease;
+
+    .next:hover & { clip-path: inset(0 0 0 0); }
+  }
+}

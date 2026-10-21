@@ -1,0 +1,20 @@
+@use "../abstracts" as *;
+
+// Block: .footer
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 36px $gutter;
+  border-top: 1px solid $line;
+  font-size: 12px;
+  color: $muted;
+
+  &__nav { display: flex; gap: 20px; }
+
+  &__link {
+    transition: color 0.3s $ease;
+    &:hover { color: $ink; }
+  }
+}

@@ -1,0 +1,39 @@
+// ==========================================================
+// Tjorn Van Wetter — Photography portfolio
+// SCSS · BEM (block__element--modifier)
+// Compile: npm run build   (→ css/style.css)
+// ==========================================================
+
+// 1. Base
+@use "base/reset";
+@use "base/typography";
+
+// 2. Layout
+@use "layout/layout";
+@use "layout/header";
+@use "layout/footer";
+
+// 3. Components
+@use "components/curtain";
+@use "components/split";
+@use "components/frame";
+@use "components/chip";
+@use "components/badge";
+@use "components/btn";
+@use "components/cursor";
+@use "components/crumbs";
+@use "components/project";
+@use "components/shot";
+@use "components/lightbox";
+@use "components/field";
+@use "components/theme-toggle";
+
+// 4. Pages
+@use "pages/home";
+@use "pages/case";
+@use "pages/photo";
+@use "pages/about";
+@use "pages/contact";
+
+// 5. Utilities
+@use "utilities/reveal";

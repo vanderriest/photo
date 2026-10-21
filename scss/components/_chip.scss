@@ -1,0 +1,33 @@
+@use "../abstracts" as *;
+
+// Block: .chip — pill button (filters, print sizes)
+.chip {
+  @include label(11px, 0.14em);
+  @include fill-slide;
+  padding: 10px 16px;
+  border: 1px solid $line;
+  border-radius: 99px;
+  transition: color 0.4s $ease, border-color 0.4s $ease;
+
+  &:hover { border-color: $ink; }
+
+  &__count {
+    font-family: $mono;
+    font-size: 9px;
+    margin-left: 4px;
+    opacity: 0.6;
+  }
+
+  &--active {
+    color: $paper;
+    border-color: $ink;
+    &::before { transform: none; }
+  }
+}
+
+// Block: .chips — row of chips
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

@@ -1,0 +1,39 @@
+@use "../abstracts" as *;
+
+// Block: .frame — image container with fade/scale-in and fallback
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: $paper-2;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.08);
+    transition: transform 1.4s $ease, opacity 1s $ease, filter 0.8s $ease;
+
+    &--loaded { opacity: 1; transform: scale(1); }
+  }
+
+  // Sea-tint overlay, shown by parent blocks on hover
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: $sea;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 0.6s $ease;
+    pointer-events: none;
+  }
+
+  &--full { height: 100%; }
+  &--bare { background: none; }
+
+  &--failed {
+    background: linear-gradient(135deg, #c9d3d3, #8ea3a8 60%, #5f7a82);
+    .frame__img { opacity: 0 !important; }
+  }
+}

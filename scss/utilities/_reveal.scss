@@ -1,0 +1,10 @@
+@use "../abstracts" as *;
+
+// Block: .reveal — fade-up when scrolled into view (JS adds --in)
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s $ease, transform 1.2s $ease;
+
+  &--in { opacity: 1; transform: none; }
+}

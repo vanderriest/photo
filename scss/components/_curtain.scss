@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+
+// Block: .curtain — page transition overlay
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: $curtain;
+  pointer-events: none;
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform 0.9s $ease-io;
+
+  .page--loaded & { transform: scaleY(0); }
+
+  .page--leaving & {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition-duration: 0.6s;
+  }
+}

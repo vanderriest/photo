@@ -1,0 +1,132 @@
+@use "../abstracts" as *;
+
+// Block: .lightbox — level 3 viewer, with zoom (level 4)
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: $lb-bg;
+  color: $lb-ink;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s $ease, visibility 0s 0.5s;
+
+  &--open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s $ease;
+  }
+
+  &__top,
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px $gutter;
+  }
+
+  &__top { @include label; }
+  &__bottom { position: relative; }
+
+  // Close button with rotating X
+  &__close {
+    @include label;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__close-icon {
+    position: relative;
+    width: 18px; height: 18px;
+    transition: transform 0.5s $ease;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      height: 1px;
+      background: currentColor;
+      transform: rotate(45deg);
+    }
+    &::after { transform: rotate(-45deg); }
+
+    .lightbox__close:hover & { transform: rotate(90deg); }
+  }
+
+  &__stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 0 $gutter;
+    cursor: zoom-in;
+
+    &--zoomed { cursor: zoom-out; }
+  }
+
+  &__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transform-origin: 50% 50%;
+    clip-path: inset(0 0 0 0);
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: transform 0.7s $ease, opacity 0.45s $ease, clip-path 0.9s $ease;
+
+    &--swapping { opacity: 0; transform: translateX(var(--dir, 30px)); }
+    &--entering { opacity: 0; clip-path: inset(12% 12% 12% 12%); }
+
+    .lightbox__stage--zoomed & { transition: transform 0.12s linear; }
+  }
+
+  &__hint {
+    position: absolute;
+    bottom: 16px; left: 50%;
+    transform: translateX(-50%);
+    font-family: $mono;
+    font-size: 10.5px;
+    color: #8a8680;
+    pointer-events: none;
+    transition: opacity 0.4s;
+
+    .lightbox__stage--zoomed & { opacity: 0; }
+  }
+
+  &__title { @include serif(clamp(24px, 2.6vw, 36px), 1.1, -0.01em); }
+  &__meta { color: $lb-muted; }
+
+  &__link {
+    @include label;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(#fff, 0.3);
+    transition: border-color 0.4s;
+    &:hover { border-color: #fff; }
+  }
+
+  &__arrows { display: flex; gap: 8px; }
+
+  &__btn {
+    display: grid;
+    place-items: center;
+    width: 46px; height: 46px;
+    border: 1px solid rgba(#fff, 0.22);
+    border-radius: 50%;
+    transition: background 0.4s $ease, color 0.4s, transform 0.4s $ease;
+
+    &:hover { background: $lb-ink; color: #111; transform: scale(1.06); }
+  }
+
+  &__progress {
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 1px;
+    background: $lb-ink;
+    transition: width 0.7s $ease;
+  }
+}

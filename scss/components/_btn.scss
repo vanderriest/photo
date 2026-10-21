@@ -1,0 +1,37 @@
+@use "../abstracts" as *;
+
+// Block: .btn — outlined pill with fill + rolling label on hover
+.btn {
+  @include label;
+  @include fill-slide($ink, scaleY(0));
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border: 1px solid $ink;
+  border-radius: 99px;
+  transition: color 0.5s $ease;
+
+  &::before { transform-origin: bottom; }
+
+  &:hover {
+    color: $paper;
+    &::before { transform: scaleY(1); }
+  }
+
+  &__roll {
+    display: inline-block;
+    height: 1.2em;
+    overflow: hidden;
+    line-height: 1.2;
+  }
+
+  &__text {
+    display: block;
+    transition: transform 0.5s $ease;
+    .btn:hover & { transform: translateY(-100%); }
+  }
+
+  &--start { align-self: flex-start; }
+  &--spaced { margin-top: 40px; }
+}

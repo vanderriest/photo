@@ -1,0 +1,81 @@
+@use "sass:map";
+@use "variables" as *;
+
+// Media query: @include mq(sm) { ... }  → max-width
+@mixin mq($key) {
+  @media (max-width: map.get($breakpoints, $key)) { @content; }
+}
+
+@mixin touch { @media (hover: none) { @content; } }
+
+// Small uppercase label style
+@mixin label($size: 11px, $tracking: 0.16em, $weight: 500) {
+  font-family: $sans;
+  font-size: $size;
+  font-weight: $weight;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+}
+
+// Serif headline
+@mixin serif($size, $leading: 1, $tracking: -0.02em) {
+  font-family: $serif;
+  font-weight: 400;
+  font-size: $size;
+  line-height: $leading;
+  letter-spacing: $tracking;
+}
+
+// 1px underline that grows from left on hover
+@mixin underline-grow($states: ("&:hover")) {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s $ease;
+  }
+
+  @each $state in $states {
+    #{$state}::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+}
+
+// Background that slides in behind the element on hover / active
+@mixin fill-slide($color: $ink, $from: translateY(101%)) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: $color;
+    transform: $from;
+    transition: transform 0.5s $ease;
+  }
+}
+
+// Span full grid on small screens
+@mixin stack-on-mobile {
+  @include mq(sm) {
+    > * { grid-column: 1 / -1 !important; }
+  }
+}
+
+@mixin grid-12($gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
